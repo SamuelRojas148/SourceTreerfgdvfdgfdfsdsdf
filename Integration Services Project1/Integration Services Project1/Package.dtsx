@@ -11,8 +11,8 @@
   DTS:LocaleID="9226"
   DTS:ObjectName="Package"
   DTS:PackageType="5"
-  DTS:VersionBuild="1"
-  DTS:VersionGUID="{C8BF68FB-0B79-4C70-A185-6A97249D3DF1}">
+  DTS:VersionBuild="2"
+  DTS:VersionGUID="{0F459023-8D86-4FBD-A9D1-F7C600286D98}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:Variables />
@@ -256,6 +256,77 @@
                 </output>
               </outputs>
             </component>
+            <component
+              refId="Package\Data Flow Task\Origen OData"
+              componentClassID="Microsoft.ManagedComponentHost"
+              contactInfo="Componente de origen OData;Microsoft Corporation; Microsoft SQL Server; © Microsoft Corporation; Todos los derechos reservados; http://www.microsoft.com/sql/support;0"
+              description="Leer datos de los servicios OData"
+              name="Origen OData"
+              usesDispositions="true">
+              <properties>
+                <property
+                  dataType="System.String"
+                  description="Nombre de la colección que se recuperará del servicio."
+                  expressionType="Notify"
+                  name="CollectionName"></property>
+                <property
+                  dataType="System.Int32"
+                  description="La longitud máxima predeterminada de una cadena que no tiene maxlength especificada en el esquema."
+                  name="DefaultStringLength">4000</property>
+                <property
+                  dataType="System.String"
+                  description="Consulta en la dirección URL. "
+                  expressionType="Notify"
+                  name="Query"></property>
+                <property
+                  dataType="System.String"
+                  description="Ruta de acceso a recursos de la colección que se recuperará del servicio."
+                  expressionType="Notify"
+                  name="ResourcePath"></property>
+                <property
+                  dataType="System.Boolean"
+                  description="Cuando se establece en True, use la ruta de acceso a recursos como la colección solicitada; en caso contrario, use el nombre de la colección."
+                  expressionType="Notify"
+                  name="UseResourcePath">false</property>
+                <property
+                  dataType="System.String"
+                  name="UserComponentTypeName">Microsoft.OData</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Data Flow Task\Origen OData.Connections[Conexión]"
+                  description="Conexión al servicio OData"
+                  name="Conexión" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\Data Flow Task\Origen OData.Outputs[Output]"
+                  name="Output">
+                  <externalMetadataColumns
+                    isUsed="True" />
+                </output>
+                <output
+                  refId="Package\Data Flow Task\Origen OData.Outputs[Error output]"
+                  isErrorOut="true"
+                  name="Error output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Data Flow Task\Origen OData.Outputs[Error output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task\Origen OData.Outputs[Error output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Origen OData.Outputs[Error output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task\Origen OData.Outputs[Error output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
           </components>
         </pipeline>
       </DTS:ObjectData>
@@ -286,13 +357,17 @@
       <GraphLayout
         Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph">
         <NodeLayout
+          Size="113,42"
+          Id="Package\Data Flow Task\Lookup"
+          TopLeft="276,228" />
+        <NodeLayout
           Size="142,42"
           Id="Package\Data Flow Task\ODBC Source"
           TopLeft="225,110" />
         <NodeLayout
-          Size="113,42"
-          Id="Package\Data Flow Task\Lookup"
-          TopLeft="276,228" />
+          Size="143,42"
+          Id="Package\Data Flow Task\Origen OData"
+          TopLeft="223,298" />
       </GraphLayout>
     </LayoutInfo>
   </TaskHost>
